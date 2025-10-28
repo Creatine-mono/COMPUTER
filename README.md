@@ -16,30 +16,45 @@
 ## 1. 기본 논리 게이트
 
 ### AND게이트.jpg
+
+![AND게이트](./PIC/AND게이트.jpg)
+
 - **기능**: 논리곱 연산 수행
 - **입력**: A, B (2개)
 - **출력**: Q = A AND B
 - **특징**: 두 입력이 모두 1일 때만 출력이 1
 
 ### OR게이트.jpg
+
+![OR게이트](./PIC/OR게이트.jpg)
+
 - **기능**: 논리합 연산 수행
 - **입력**: A, B (2개)
 - **출력**: Q = A OR B
 - **특징**: 입력 중 하나라도 1이면 출력이 1
 
 ### NOT게이트.jpg
+
+![NOT게이트](./PIC/NOT게이트.jpg)
+
 - **기능**: 논리 반전 (인버터)
 - **입력**: A (1개)
 - **출력**: Q = NOT A
 - **특징**: 입력을 반대로 변환 (0→1, 1→0)
 
 ### NAND게이트.jpg
+
+![NAND게이트](./PIC/NAND게이트.jpg)
+
 - **기능**: NOT AND 연산
 - **입력**: A, B (2개)
 - **출력**: Q = NOT(A AND B)
 - **특징**: 피드백 루프로 구현됨, 범용 게이트
 
 ### XOR게이트.jpg
+
+![XOR게이트](./PIC/XOR게이트.jpg)
+
 - **기능**: 배타적 논리합 연산
 - **입력**: A, B (2개)
 - **출력**: Q = A XOR B
@@ -51,6 +66,9 @@
 ## 2. 산술 연산 회로
 
 ### Half_Adder.jpg
+
+![Half_Adder](./PIC/Half_Adder.jpg)
+
 - **기능**: 1비트 반가산기
 - **입력**: IN_A, IN_B
 - **출력**:
@@ -60,6 +78,9 @@
 - **특징**: 이전 자리의 캐리를 고려하지 않음
 
 ### Full_Adder.jpg
+
+![Full_Adder](./PIC/Full_Adder.jpg)
+
 - **기능**: 1비트 전가산기
 - **입력**: IN_A, IN_B, IN_C (캐리 입력)
 - **출력**:
@@ -73,30 +94,45 @@
 ## 3. 멀티플렉서 (MUX)
 
 ### MUX.jpg
+
+![MUX](./PIC/MUX.jpg)
+
 - **기능**: 2:1 멀티플렉서
 - **입력**: A, B, Selection
 - **출력**: Q
 - **특징**: Selection 신호에 따라 A 또는 B를 출력으로 선택
 
 ### MUX8.jpg
+
+![MUX8](./PIC/MUX8.jpg)
+
 - **기능**: 8비트 2:1 멀티플렉서
 - **입력**: IN_A[7:0], IN_B[7:0], Selection
 - **출력**: OUT[7:0]
 - **특징**: 8개의 1비트 MUX를 병렬로 사용
 
 ### MUX8X4.jpg
+
+![MUX8X4](./PIC/MUX8X4.jpg)
+
 - **기능**: 4:1 8비트 멀티플렉서
 - **입력**: IN_0, IN_1, IN_2, IN_3 (각 8비트), SELECTION[1:0]
 - **출력**: Q (8비트)
 - **특징**: 4개의 8비트 입력 중 하나 선택
 
 ### MUX8X8.jpg
+
+![MUX8X8](./PIC/MUX8X8.jpg)
+
 - **기능**: 8:1 8비트 멀티플렉서
 - **입력**: IN_0 ~ IN_7 (각 8비트), SELECTION[2:0]
 - **출력**: Q (8비트)
 - **특징**: 8개의 8비트 입력 중 하나 선택
 
 ### MUX8X16.jpg
+
+![MUX8X16](./PIC/MUX8X16.jpg)
+
 - **기능**: 16:1 8비트 멀티플렉서
 - **입력**: IN_0 ~ IN_15 (각 8비트), SELECTION[3:0]
 - **출력**: Q (8비트)
@@ -107,12 +143,18 @@
 ## 4. 디코더
 
 ### Decoder3In.jpg
+
+![Decoder3In](./PIC/Decoder3In.jpg)
+
 - **기능**: 3-to-8 디코더
 - **입력**: SELECTION[2:0], ENABLE
 - **출력**: OUT0 ~ OUT7 (8개)
 - **특징**: 3비트 입력을 8개 출력 중 하나로 변환
 
 ### Decoder4In.jpg
+
+![Decoder4In](./PIC/Decoder4In.jpg)
+
 - **기능**: 4-to-16 디코더
 - **입력**: SELECTION[3:0], ENABLE
 - **출력**: OUT0 ~ OUT15 (16개)
@@ -123,6 +165,9 @@
 ## 5. 메모리/래치 회로
 
 ### SRLatch.jpg
+
+![SRLatch](./PIC/SRLatch.jpg)
+
 - **기능**: SR 래치 (Set-Reset Latch)
 - **입력**: S (Set), R (Reset)
 - **출력**: Q
@@ -130,6 +175,9 @@
 - **특징**: 1비트 데이터 저장, 비동기 메모리 소자
 
 ### GatedSRLatch.jpg
+
+![GatedSRLatch](./PIC/GatedSRLatch.jpg)
+
 - **기능**: 게이트 제어 SR 래치
 - **입력**: S (Set), E (Enable), R (Reset)
 - **출력**: Q
@@ -141,12 +189,18 @@
 ## 6. 버퍼
 
 ### ControlledBuffer.jpg
+
+![ControlledBuffer](./PIC/ControlledBuffer.jpg)
+
 - **기능**: 제어 가능한 버퍼
 - **입력**: Data_In, Enable
 - **출력**: Data_Out
 - **특징**: Enable 신호로 데이터 통과 여부 제어, 트라이스테이트 버퍼
 
 ### ControlledBuffer8.jpg
+
+![ControlledBuffer8](./PIC/ControlledBuffer8.jpg)
+
 - **기능**: 8비트 제어 버퍼
 - **입력**: Data_In[7:0], Enable
 - **출력**: Data_Out[7:0]
@@ -157,6 +211,9 @@
 ## 7. ALU (산술논리연산장치)
 
 ### ALU.jpg
+
+![ALU](./PIC/ALU.jpg)
+
 - **기능**: 8비트 산술논리연산장치
 - **구성 요소**:
   - 8개의 ALU 슬라이스 (각각 Full Adder 포함)
