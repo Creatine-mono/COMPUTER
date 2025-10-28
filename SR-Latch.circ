@@ -2446,7 +2446,7 @@
     <comp lib="1" loc="(900,710)" name="AND Gate"/>
     <comp lib="1" loc="(900,890)" name="AND Gate"/>
     <comp lib="1" loc="(990,800)" name="AND Gate"/>
-    <comp lib="8" loc="(864,635)" name="Text">
+    <comp lib="8" loc="(860,635)" name="Text">
       <a name="text" val="Zero Checker"/>
     </comp>
     <comp loc="(1050,440)" name="Full_Adder"/>
@@ -2555,5 +2555,88 @@
     <wire from="(980,410)" to="(990,410)"/>
     <wire from="(980,470)" to="(990,470)"/>
     <wire from="(990,800)" to="(1010,800)"/>
+  </circuit>
+  <circuit name="SRLatch">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="SRLatch"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="8.0"/>
+    <comp lib="0" loc="(220,180)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="S"/>
+    </comp>
+    <comp lib="0" loc="(220,350)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="R"/>
+    </comp>
+    <comp lib="0" loc="(420,330)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="Q"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="1" loc="(350,200)" name="NOR Gate"/>
+    <comp lib="1" loc="(350,330)" name="NOR Gate"/>
+    <wire from="(220,180)" to="(290,180)"/>
+    <wire from="(220,350)" to="(290,350)"/>
+    <wire from="(280,220)" to="(280,230)"/>
+    <wire from="(280,220)" to="(290,220)"/>
+    <wire from="(280,230)" to="(360,230)"/>
+    <wire from="(280,300)" to="(280,310)"/>
+    <wire from="(280,300)" to="(370,300)"/>
+    <wire from="(280,310)" to="(290,310)"/>
+    <wire from="(350,200)" to="(370,200)"/>
+    <wire from="(350,330)" to="(360,330)"/>
+    <wire from="(360,230)" to="(360,330)"/>
+    <wire from="(360,330)" to="(420,330)"/>
+    <wire from="(370,200)" to="(370,300)"/>
+  </circuit>
+  <circuit name="GatedSRLatch">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="GatedSRLatch"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="8.0"/>
+    <comp lib="0" loc="(380,160)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="S"/>
+    </comp>
+    <comp lib="0" loc="(380,250)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="E"/>
+    </comp>
+    <comp lib="0" loc="(380,370)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="R"/>
+    </comp>
+    <comp lib="0" loc="(660,330)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="Q"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="1" loc="(490,180)" name="AND Gate"/>
+    <comp lib="1" loc="(490,350)" name="AND Gate"/>
+    <comp lib="1" loc="(590,200)" name="NOR Gate"/>
+    <comp lib="1" loc="(590,330)" name="NOR Gate"/>
+    <wire from="(380,160)" to="(440,160)"/>
+    <wire from="(380,250)" to="(410,250)"/>
+    <wire from="(380,370)" to="(440,370)"/>
+    <wire from="(410,200)" to="(410,250)"/>
+    <wire from="(410,200)" to="(440,200)"/>
+    <wire from="(410,250)" to="(410,330)"/>
+    <wire from="(410,330)" to="(440,330)"/>
+    <wire from="(490,180)" to="(530,180)"/>
+    <wire from="(490,350)" to="(530,350)"/>
+    <wire from="(520,220)" to="(520,230)"/>
+    <wire from="(520,220)" to="(530,220)"/>
+    <wire from="(520,230)" to="(600,230)"/>
+    <wire from="(520,300)" to="(520,310)"/>
+    <wire from="(520,300)" to="(610,300)"/>
+    <wire from="(520,310)" to="(530,310)"/>
+    <wire from="(590,200)" to="(610,200)"/>
+    <wire from="(590,330)" to="(600,330)"/>
+    <wire from="(600,230)" to="(600,330)"/>
+    <wire from="(600,330)" to="(660,330)"/>
+    <wire from="(610,200)" to="(610,300)"/>
   </circuit>
 </project>
