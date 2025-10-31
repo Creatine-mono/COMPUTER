@@ -625,7 +625,6 @@ Level 8: 완전한 컴퓨터
 
 **관련 파일:**
 - 어셈블리 코드: [`5X4/5X4.asm`](./5X4/5X4.asm)
-- 실행 움짤: [`5X4/5x4-demo-ezgif.com-video-to-gif-converter.gif`](./5X4/5x4-demo-ezgif.com-video-to-gif-converter.gif)
 
 **프로그램 설명:**
 ```assembly
@@ -662,7 +661,7 @@ JMP 0         // 처음으로 반복
 
 **관련 파일:**
 - 어셈블리 코드: [`7div3/7div3.asm`](./7div3/7div3.asm)
-- 실행 움짤: [`7div3/mainofcontrolunitLogisim-evolutionv3.9.02025-10-3118-06-22-ezgif.com-video-to-gif-converter.gif`](./7div3/mainofcontrolunitLogisim-evolutionv3.9.02025-10-3118-06-22-ezgif.com-video-to-gif-converter.gif)
+
 
 **프로그램 설명:**
 
@@ -671,6 +670,4 @@ JMP 0         // 처음으로 반복
 **결과:** 7÷3 = **2** (나머지 1)
 
 ---
-
-## 학습 순서 권장
 
