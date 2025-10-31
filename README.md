@@ -619,13 +619,13 @@ Level 8: 완전한 컴퓨터
 
 **Logisim-evolution에서 실행되는 5×4 = 20 계산 과정**
 
-https://github.com/user/repo/assets/5X4/5x4-demo.mp4
+![5×4 곱셈 실행](./5X4/5x4-demo-ezgif.com-video-to-gif-converter.gif)
 
 *실제 CPU에서 명령어가 실행되는 과정을 단계별로 확인할 수 있습니다.*
 
 **관련 파일:**
 - 어셈블리 코드: [`5X4/5X4.asm`](./5X4/5X4.asm)
-- 실행 동영상: [`5X4/5x4-demo.mp4`](./5X4/5x4-demo.mp4)
+- 실행 움짤: [`5X4/5x4-demo-ezgif.com-video-to-gif-converter.gif`](./5X4/5x4-demo-ezgif.com-video-to-gif-converter.gif)
 
 **프로그램 설명:**
 ```assembly
@@ -649,6 +649,26 @@ JMP 0         // 처음으로 반복
 ```
 
 **결과:** 5를 4번 더하여 5×4 = **20 출력**
+
+---
+
+### 7÷3 나눗셈 프로그램 실행
+
+**Logisim-evolution에서 실행되는 7÷3 = 2 (나머지 1) 계산 과정**
+
+![7÷3 나눗셈 실행](./7div3/mainofcontrolunitLogisim-evolutionv3.9.02025-10-3118-06-22-ezgif.com-video-to-gif-converter.gif)
+
+*실제 CPU에서 나눗셈을 반복 뺄셈으로 구현하는 과정을 확인할 수 있습니다.*
+
+**관련 파일:**
+- 어셈블리 코드: [`7div3/7div3.asm`](./7div3/7div3.asm)
+- 실행 움짤: [`7div3/mainofcontrolunitLogisim-evolutionv3.9.02025-10-3118-06-22-ezgif.com-video-to-gif-converter.gif`](./7div3/mainofcontrolunitLogisim-evolutionv3.9.02025-10-3118-06-22-ezgif.com-video-to-gif-converter.gif)
+
+**프로그램 설명:**
+
+나눗셈은 반복 뺄셈으로 구현됩니다. 피제수(7)에서 제수(3)를 반복적으로 빼면서 몇 번 뺄 수 있는지 세어 몫을 구합니다.
+
+**결과:** 7÷3 = **2** (나머지 1)
 
 ---
 
