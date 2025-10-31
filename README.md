@@ -15,7 +15,9 @@
 10. [메모리 시스템](#10-메모리-시스템)
 11. [제어 유닛 및 카운터](#11-제어-유닛-및-카운터)
 12. [컴퓨터 아키텍처](#12-컴퓨터-아키텍처)
-13. [예제](#13-예제)
+13. [CPU 명령어 구현](#13-cpu-명령어-구현)
+14. [출력 레지스터](#14-출력-레지스터)
+15. [예제](#15-예제)
 
 ---
 
@@ -390,7 +392,167 @@
 
 ---
 
-## 13. 예제
+## 13. CPU 명령어 구현
+
+이 섹션에서는 CPU가 실행하는 각 명령어의 회로 구현을 보여줍니다.
+
+### NOP,LOADA.jpg
+
+![NOP,LOADA](./PIC/NOP,LOADA.jpg)
+
+- **기능**: NOP (No Operation)와 LOADA 명령어 비교
+- **NOP**: 아무 동작도 하지 않음
+- **LOADA**: 메모리에서 A 레지스터로 데이터 로드
+- **특징**: 가장 기본적인 명령어 구현 예시
+
+### LOADA.jpg
+
+![LOADA](./PIC/LOADA.jpg)
+
+- **기능**: Load A 명령어
+- **동작**: RAM[address] → A 레지스터
+- **제어 신호**:
+  - RAM ENABLE: 1 (메모리 읽기)
+  - A SET: 1 (A 레지스터 쓰기)
+- **특징**: 메모리에서 데이터를 읽어 누산기(A)에 저장
+
+### LOADAI.jpg
+
+![LOADAI](./PIC/LOADAI.jpg)
+
+- **기능**: Load A Immediate (즉시 값 로드)
+- **동작**: 명령어에 포함된 즉시 값 → A 레지스터
+- **제어 신호**:
+  - IR 출력 활성화
+  - A SET: 1
+- **특징**: 메모리 접근 없이 명령어 내부의 값을 직접 로드
+
+### ADD.jpg
+
+![ADD](./PIC/ADD.jpg)
+
+- **기능**: 덧셈 명령어
+- **동작**: A + RAM[address] → A
+- **제어 신호**:
+  - RAM ENABLE: 1
+  - ALU 덧셈 모드
+  - A SET: 1
+- **특징**: 메모리의 값을 A에 더하고 결과를 A에 저장
+
+### SUB.jpg
+
+![SUB](./PIC/SUB.jpg)
+
+- **기능**: 뺄셈 명령어
+- **동작**: A - RAM[address] → A
+- **제어 신호**:
+  - RAM ENABLE: 1
+  - ALU 뺄셈 모드
+  - A SET: 1
+- **특징**: A에서 메모리 값을 빼고 결과를 A에 저장
+
+### STOREA.jpg
+
+![STOREA](./PIC/STOREA.jpg)
+
+- **기능**: Store A 명령어
+- **동작**: A 레지스터 → RAM[address]
+- **제어 신호**:
+  - A ENABLE: 1
+  - RAM SET: 1 (메모리 쓰기)
+- **특징**: 누산기의 값을 메모리에 저장
+
+### JMP.jpg
+
+![JMP](./PIC/JMP.jpg)
+
+- **기능**: 무조건 점프 (Jump)
+- **동작**: PC ← address
+- **제어 신호**:
+  - PC JMP: 1
+- **특징**: 프로그램 카운터를 지정된 주소로 변경하여 무조건 분기
+
+### JMPC.jpg
+
+![JMPC](./PIC/JMPC.jpg)
+
+- **기능**: Carry 플래그가 1이면 점프
+- **동작**: if (Carry == 1) then PC ← address
+- **제어 신호**:
+  - Carry 플래그 검사
+  - 조건 만족 시 PC JMP: 1
+- **특징**: 조건부 분기 (덧셈 오버플로우 검사)
+
+### JMPZ.jpg
+
+![JMPZ](./PIC/JMPZ.jpg)
+
+- **기능**: Zero 플래그가 1이면 점프
+- **동작**: if (Zero == 1) then PC ← address
+- **제어 신호**:
+  - Zero 플래그 검사
+  - 조건 만족 시 PC JMP: 1
+- **특징**: 조건부 분기 (연산 결과가 0인지 검사)
+
+### OUT.jpg
+
+![OUT](./PIC/OUT.jpg)
+
+- **기능**: 출력 명령어
+- **동작**: A 레지스터 → 출력 레지스터
+- **제어 신호**:
+  - A ENABLE: 1
+  - OUT SET: 1
+- **특징**: 누산기의 값을 출력 장치로 전송
+
+### HLT.jpg
+
+![HLT](./PIC/HLT.jpg)
+
+- **기능**: Halt (정지) 명령어
+- **동작**: 프로그램 실행 중지
+- **제어 신호**:
+  - CLOCK HALT: 1
+- **특징**: 클록을 중지하여 CPU 실행을 멈춤
+
+---
+
+## 14. 출력 레지스터
+
+### Output Register.jpg
+
+![Output Register](./PIC/Output%20Register.jpg)
+
+- **기능**: 출력 전용 8비트 레지스터
+- **입력**: IN[7:0], SET, CLK
+- **출력**: OUT[7:0] (7-세그먼트 디스플레이 등에 연결)
+- **특징**:
+  - CPU 연산 결과를 외부로 출력
+  - 사용자가 볼 수 있는 유일한 레지스터
+  - 클록 동기화 동작
+
+### controllunit.jpg
+
+![controllunit](./PIC/controllunit.jpg)
+
+- **기능**: 완전한 제어 유닛 구현
+- **입력**:
+  - 명령어 레지스터 (IR)
+  - 단계 카운터 (SC)
+  - 플래그 (Zero, Carry)
+- **출력**: 모든 제어 신호
+- **구성**:
+  - 명령어 디코더
+  - 제어 신호 생성 로직
+  - 조건부 분기 제어
+- **특징**:
+  - 모든 명령어의 실행을 조율
+  - Fetch-Decode-Execute 사이클 관리
+  - CPU의 두뇌 역할
+
+---
+
+## 15. 예제
 
 ### Example.jpg
 
@@ -407,49 +569,97 @@
 ## 회로 설계 계층 구조
 
 ```
-기본 게이트 (AND, OR, NOT, NAND, XOR)
-    ↓
-복합 회로 (Half Adder, MUX, Latch, Buffer)
-    ↓
-고급 회로 (Full Adder, Decoder, D/JK Latch)
-    ↓
-기능 유닛 (ALU, Register, RAM)
-    ↓
-제어 시스템 (PC, SC, CU, Clock)
-    ↓
-완전한 컴퓨터 (Computer Architecture)
+Level 1: 기본 논리 게이트
+├─ AND, OR, NOT, NAND, XOR
+└─ 모든 디지털 회로의 기초
+
+Level 2: 조합 논리 회로
+├─ Half Adder, MUX, Buffer
+├─ Decoder
+└─ 입력에 따라 즉시 출력 결정
+
+Level 3: 순차 논리 회로
+├─ SR Latch, Gated SR Latch
+├─ D Latch, JK Latch
+├─ Clock
+└─ 상태를 저장하는 메모리 소자
+
+Level 4: 메모리 시스템
+├─ 8-bit Register
+├─ RAM (8×16)
+├─ Output Register
+└─ 데이터 저장 및 관리
+
+Level 5: 산술 논리 장치
+├─ Full Adder
+├─ ALU (ADD, SUB, AND, OR, XOR)
+└─ Zero/Carry Flags
+
+Level 6: 제어 및 카운터
+├─ Program Counter (PC)
+├─ Step Counter (SC)
+├─ Instruction Register
+└─ Control Unit (CU)
+
+Level 7: CPU 명령어 구현
+├─ 데이터 이동: LOADA, LOADAI, STOREA
+├─ 산술 연산: ADD, SUB
+├─ 분기: JMP, JMPC, JMPZ
+└─ 제어: NOP, OUT, HLT
+
+Level 8: 완전한 컴퓨터
+├─ Computer Without CU
+├─ Complete Computer with CU
+└─ 프로그램 실행 가능한 시스템
 ```
 
 ## 학습 순서 권장
 
 1. **1단계**: 기본 논리 게이트 이해
    - AND, OR, NOT, NAND, XOR
+   - 진리표 이해 및 연습
 
 2. **2단계**: 조합 논리 회로
    - Half Adder, Full Adder
-   - MUX, Decoder
-   - Controlled Buffer
+   - MUX (2:1, 8-bit, 4:1, 8:1, 16:1)
+   - Decoder (3-to-8, 4-to-16)
+   - Controlled Buffer (1-bit, 8-bit)
 
 3. **3단계**: 순차 논리 회로
    - SR Latch, Gated SR Latch
    - D Latch, JK Latch
-   - Clock
+   - Clock 신호 이해
 
 4. **4단계**: 메모리 및 저장 장치
    - Register (8-bit)
    - RAM (8×16)
+   - Output Register
 
 5. **5단계**: 산술 논리 장치
-   - ALU
+   - ALU 구조 및 동작
+   - Zero/Carry 플래그
 
 6. **6단계**: 제어 시스템
    - Program Counter (PC)
    - Step Counter (SC)
    - Control Unit (CU)
+   - Instruction Register
 
-7. **7단계**: 통합 시스템
+7. **7단계**: CPU 명령어 구현
+   - 데이터 이동: LOADA, LOADAI, STOREA
+   - 산술 연산: ADD, SUB
+   - 분기: JMP, JMPC, JMPZ
+   - 기타: NOP, OUT, HLT
+
+8. **8단계**: 통합 시스템
    - Computer Without CU
    - Complete Computer Architecture
+   - 전체 Fetch-Decode-Execute 사이클 이해
+
+9. **9단계**: 프로그래밍 실습
+   - 간단한 프로그램 작성
+   - 명령어 코딩 및 실행
+   - 디버깅 연습
 
 ---
 
@@ -463,11 +673,13 @@
 
 ---
 
-**작성일**: 2025-10-29 (최종 업데이트)
+**작성일**: 2025-10-31 (최종 업데이트)
 **파일 위치**: PIC 폴더
-**총 회로 수**: 30개
+**총 회로 수**: 43개
 
-## 추가된 회로 (2025-10-29)
+## 추가된 회로
+
+### 2025-10-29
 - D Latch (DLatch.jpg)
 - JK Latch (JKLatch.jpg)
 - Clock (CLOCK0.jpg)
@@ -479,3 +691,94 @@
 - Computer Without CU (ComputerWithoutCU.jpg)
 - Computer Without CU Update (ComputerWithoutCUupdate.jpg)
 - Example (Example.jpg)
+
+### 2025-10-31
+- NOP, LOADA 비교 (NOP,LOADA.jpg)
+- LOADA 명령어 (LOADA.jpg)
+- LOADAI 명령어 (LOADAI.jpg)
+- ADD 명령어 (ADD.jpg)
+- SUB 명령어 (SUB.jpg)
+- STOREA 명령어 (STOREA.jpg)
+- JMP 명령어 (JMP.jpg)
+- JMPC 명령어 (JMPC.jpg)
+- JMPZ 명령어 (JMPZ.jpg)
+- OUT 명령어 (OUT.jpg)
+- HLT 명령어 (HLT.jpg)
+- Output Register (Output Register.jpg)
+- Complete Control Unit (controllunit.jpg)
+
+## CPU 명령어 세트 요약
+
+| 명령어 | 기능 | 동작 |
+|--------|------|------|
+| NOP | No Operation | 아무 동작 안 함 |
+| LOADA | Load A | RAM → A |
+| LOADAI | Load A Immediate | 즉시값 → A |
+| ADD | Addition | A + RAM → A |
+| SUB | Subtraction | A - RAM → A |
+| STOREA | Store A | A → RAM |
+| JMP | Jump | 무조건 점프 |
+| JMPC | Jump if Carry | Carry=1이면 점프 |
+| JMPZ | Jump if Zero | Zero=1이면 점프 |
+| OUT | Output | A → 출력 레지스터 |
+| HLT | Halt | 프로그램 정지 |
+
+## 프로그램 예제
+
+### 예제 1: 두 수의 덧셈
+```assembly
+주소 | 명령어     | 설명
+-----|-----------|------------------
+0000 | LOADAI 5  | A ← 5
+0001 | ADD 1111  | A ← A + RAM[1111]
+0010 | OUT       | 출력 ← A
+0011 | HLT       | 정지
+...
+1111 | DATA 3    | 데이터: 3
+
+결과: 5 + 3 = 8 출력
+```
+
+### 예제 2: 조건부 분기
+```assembly
+주소 | 명령어     | 설명
+-----|-----------|------------------
+0000 | LOADAI 10 | A ← 10
+0001 | SUB 1111  | A ← A - 10
+0010 | JMPZ 0100 | A=0이면 0100으로 점프
+0011 | OUT       | A ≠ 0일 때 출력
+0100 | HLT       | 정지
+...
+1111 | DATA 10   | 데이터: 10
+
+결과: 10 - 10 = 0이므로 출력 없이 종료
+```
+
+### 예제 3: 루프 (1부터 5까지 합)
+```assembly
+주소 | 명령어        | 설명
+-----|--------------|------------------
+0000 | LOADAI 0     | A ← 0 (합계)
+0001 | STOREA 1110  | RAM[1110] ← 0
+0010 | LOADAI 1     | A ← 1 (카운터)
+0011 | STOREA 1111  | RAM[1111] ← 1
+0100 | LOADA 1110   | A ← 합계
+0101 | ADD 1111     | A ← 합계 + 카운터
+0110 | STOREA 1110  | 합계 ← A
+0111 | LOADA 1111   | A ← 카운터
+1000 | LOADAI 1     | A ← 1
+1001 | ADD 1111     | A ← 카운터 + 1
+1010 | STOREA 1111  | 카운터 ← A
+1011 | SUB 1100     | A ← 카운터 - 6
+1100 | JMPZ 1101    | 카운터=6이면 종료
+1101 | JMP 0100     | 루프 반복
+1110 | LOADA 1110   | 최종 합계 로드
+1111 | OUT          | 출력
+10000| HLT          | 정지
+...
+1100 | DATA 6       | 종료 조건
+1110 | DATA 0       | 합계 저장
+1111 | DATA 0       | 카운터 저장
+
+결과: 1+2+3+4+5 = 15 출력
+```
